@@ -1,0 +1,70 @@
+.overview-page {
+  width: 100vw;
+  height: 100vh;
+
+  .currency-header {
+    height: 4vw;
+
+    th {
+      text-align: center;
+      font-size: 1.5vw;
+    }
+  }
+
+  table, tr, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+
+  .currency-container {
+    width: 100%;
+    border-collapse: collapse;
+
+    .currency-info {
+      height: 3vw;
+
+      .content-center {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      td {
+        text-align: center;
+        font-weight: bold;
+        font-size: 1vw;
+
+        div {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .convert-arrow, .currency-image {
+          width: 2vw;
+          height: 2vw;
+          padding-left: 1vw;
+          padding-right: 1vw;
+        }
+
+        .red-circle {
+          width: 2vw;
+          height: 2vw;
+          background: red;
+          border-radius: 50%;
+        }
+
+      }
+    }
+
+    .currency-info:hover {
+      cursor: pointer;
+      background: #bbbbbb;
+    }
+  }
+
+}

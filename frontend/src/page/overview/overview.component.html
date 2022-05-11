@@ -1,0 +1,35 @@
+<div class="overview-page">
+  <table class="currency-container">
+    <thead class="currency-header">
+      <th>Currency</th>
+      <th>Course</th>
+      <th>Source</th>
+      <th>Country</th>
+      <th>Spread</th>
+      <th>Attention</th>
+    </thead>
+    <tbody>
+      <tr class="currency-info" *ngFor="let frame of currencyFrames" (click)="openDetailsPage(frame.source, frame.country, frame.firstCurrency, frame.secondCurrency)">
+        <td>
+          <img class="currency-image" src="assets/images/{{frame.firstCurrency}}.svg" alt="{{frame.firstCurrency}}">
+          <img class="convert-arrow" src="assets/images/convert.svg" alt="=>">
+          <img class="currency-image" src="assets/images/{{frame.secondCurrency}}.svg" alt="{{frame.secondCurrency}}">
+        <td>
+          <div>
+            <span>{{frame.buyPrice | number : '1.2-6'}}</span>
+            <img class="convert-arrow" src="assets/images/convert.svg" alt="=>">
+            <span>{{frame.sellPrice | number : '1.2-6'}}</span>
+          </div>
+        </td>
+        <td>{{frame.source}}</td>
+        <td>{{frame.country}}</td>
+        <td>{{frame.spread | number : '1.2-6'}}</td>
+        <td>
+          <div class="content-center">
+            <div class="red-circle" *ngIf="frame.critical"></div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,57 @@
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/currencyanalyzer
+    username: admin
+    password: admin
+#  flyway:
+#    url: jdbc:postgresql://localhost:5432/currencyanalyzer
+#    user: admin
+#    password: admin
+
+network:
+  header:
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+
+news:
+  euronews:
+    base-url: https://www.euronews.com
+  euronews-russia:
+    base-url: https://ru.euronews.com
+  delfi:
+    base-url: https://api.delfi.lv
+  bbc:
+    base-url: https://www.bbc.com
+  bloomberg:
+    base-url: https://www.bloomberg.com
+  new-york-times:
+    base-url: https://www.nytimes.com
+
+selenium:
+  driver-path: src/main/resources/driver/chromedriver.exe
+
+client:
+  aliexpress:
+    base-url: https://aliexpress.ru
+    enable: false
+  alfa:
+    base-url: https://alfabank.ru
+    enable: false
+  tinkoff:
+    base-url: https://api.tinkoff.ru
+  sber:
+    base-url: https://www.sberbank.ru
+  gazprom:
+    base-url: https://www.gazprombank.ru
+  raiffeizen:
+    base-url: https://www.raiffeisen.ru
+  vtb:
+    base-url: https://www.vtb.ru
+  swedbank-latvia:
+    base-url: https://www.swedbank.lv
+  citadele:
+    base-url: https://www.citadele.lv
+  seb:
+    base-url: https://www.seb.lv
+logging:
+  level:
+    root: INFO

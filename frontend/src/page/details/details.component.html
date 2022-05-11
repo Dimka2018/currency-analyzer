@@ -1,0 +1,60 @@
+<div class="details-page">
+  <div class="basic-info-container" *ngIf="onlineFrames.length">
+    <div class="source-title">{{actualOnlineFrame.source || ''}} {{actualOnlineFrame.country || ''}}</div>
+    <div class="currency-container">
+      <img class="currency-image" src="assets/images/{{actualOnlineFrame.firstCurrency}}.svg"
+           alt="{{actualOnlineFrame.firstCurrency}}">
+      <img class="convert-arrow" src="assets/images/convert.svg" alt="=>">
+      <img class="currency-image" src="assets/images/{{actualOnlineFrame.secondCurrency}}.svg"
+           alt="{{actualOnlineFrame.secondCurrency}}">
+    </div>
+    <div class="currency-container">
+      {{actualOnlineFrame.buyPrice | number : '1.2-6'}}
+      <img class="convert-arrow" src="assets/images/convert.svg" alt="=>">
+      {{actualOnlineFrame.sellPrice | number : '1.2-6'}}
+    </div>
+  </div>
+  <div class="currency-online-spread-container" *ngIf="onlineFramesChart.length">
+    <ngx-charts-area-chart
+      [results]=onlineFramesChart
+      [animations]="true"
+      [scheme]="colorSchema"
+      [yAxis]="true"
+      [xAxis]="true"
+      [legend]="true"
+      [legendTitle]="''"
+      [legendPosition]=legendPosition
+      [timeline]="true">
+    </ngx-charts-area-chart>
+  </div>
+  <table class="news-container">
+    <thead>
+    <th>
+      <select class="news-filter" [(ngModel)]="filterDate" (change)="applyFilter()">
+        <option></option>
+        <option *ngFor="let date of getNewsDates()">{{date}}</option>
+      </select>
+    </th>
+    <th>
+      <select class="news-filter" [(ngModel)]="filterSource" (change)="applyFilter()">
+        <option></option>
+        <option *ngFor="let source of getNewsSources()">{{source}}</option>
+      </select>
+    </th>
+    <th>
+      <input class="news-filter" [(ngModel)]="filterText" (input)="applyFilter()">
+    </th>
+    </thead>
+    <tbody>
+    <tr *ngFor="let article of filteredNews" (click)="openUrl(article.url)">
+      <td>
+        {{article.date | date: 'yyyy/MM/dd'}}
+      </td>
+      <td>{{article.source}}</td>
+      <td>
+        {{article.title}}
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
