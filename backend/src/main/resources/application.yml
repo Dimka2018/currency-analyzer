@@ -52,6 +52,9 @@ client:
     base-url: https://www.citadele.lv
   seb:
     base-url: https://www.seb.lv
+admin:
+  username: admin
+  password: "{bcrypt}$2a$10$nLje5D9UzxJdd.OdpGgozOtvefbOt6o8n4YX.l.TerwMZ71HfHJpW"
 logging:
   level:
     root: INFO
