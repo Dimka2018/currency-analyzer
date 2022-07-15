@@ -1,0 +1,44 @@
+.login-page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form {
+  width: 40vw;
+  height: 40vw;
+  border: solid 5px black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .input-element {
+    margin-top: 5vw;
+    width: 70%;
+    height: 10%;
+    border: solid 1px black;
+    border-radius: 1vw;
+    font-size: 2vw;
+    text-align: center;
+  }
+
+  .login-button {
+    margin-top: 10vw;
+    width: 70%;
+    height: 10%;
+    border: solid 1px black;
+    border-radius: 1vw;
+    font-size: 2.5vw;
+    font-weight: bold;
+    background: white;
+    color: black;
+  }
+
+  .login-button:hover {
+    cursor: pointer;
+    background: black;
+    color: white;
+  }
+}

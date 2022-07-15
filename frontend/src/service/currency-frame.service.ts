@@ -23,4 +23,14 @@ export class CurrencyFrameService {
     })
   }
 
+  public downloadHistory() {
+    window.location.href = '/api/currencies/history/zip';
+  }
+
+  public applyHistory(file: any): Observable<void> {
+    let formData = new FormData();
+    formData.append("file", file)
+    return this.http.post<void>("/api/articles/history/zip", formData);
+  }
+
 }

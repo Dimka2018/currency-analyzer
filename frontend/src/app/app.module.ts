@@ -8,12 +8,16 @@ import {HttpClientModule} from "@angular/common/http";
 import {DetailsComponent} from "../page/details/details.component";
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {Login} from "../page/login/login.component";
+import {AdminConsole} from "../page/admin-console/admin-console.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     OverviewComponent,
-    DetailsComponent
+    DetailsComponent,
+    Login,
+    AdminConsole
   ],
   imports: [
     BrowserModule,

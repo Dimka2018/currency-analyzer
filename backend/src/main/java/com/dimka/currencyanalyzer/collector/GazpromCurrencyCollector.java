@@ -33,7 +33,7 @@ public class GazpromCurrencyCollector extends CurrencyCollector {
         return gazpromClient.getCurrencies()
                 .stream()
                 .filter(r -> r.getContent() != null)
-                .collect(Collectors.toList())
+                .toList()
                 .get(0)
                 .getContent().get(0)
                 .getItems().stream()

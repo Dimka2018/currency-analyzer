@@ -1,0 +1,64 @@
+.admin-console-page {
+  width: 100vw;
+  height: 100vh;
+
+  .admin-menu {
+    width: 100%;
+    height: 8%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background: white;
+
+    .download-history-button {
+      width: 10%;
+      height: 100%;
+      color: white;
+      font-weight: bold;
+      font-size: 1.5vw;
+      background: black;
+    }
+
+    .download-history-button:hover {
+      cursor: pointer;
+    }
+
+    .file-apply {
+      width: 10%;
+      height: 100%;
+      background: black;
+
+      label {
+        width: 100%;
+        height: 100%;
+        color: white;
+        font-weight: bold;
+        font-size: 1.5vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      label:hover {
+        cursor: pointer;
+      }
+
+      input {
+        display: none;
+      }
+    }
+
+    .logout-button {
+      width: 10%;
+      height: 100%;
+      color: white;
+      font-weight: bold;
+      font-size: 1.5vw;
+      background: black;
+    }
+
+    .logout-button:hover {
+      cursor: pointer;
+    }
+  }
+}

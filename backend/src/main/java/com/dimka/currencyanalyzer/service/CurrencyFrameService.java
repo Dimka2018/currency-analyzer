@@ -22,7 +22,7 @@ public class CurrencyFrameService {
         return currencyFrameRepository.save(currencyFrame);
     }
 
-    public Flux<CurrencyFrame> save(List<CurrencyFrame> frames) {
+    public Flux<CurrencyFrame> save(Iterable<CurrencyFrame> frames) {
         return currencyFrameRepository.saveAll(frames);
     }
 
@@ -40,5 +40,9 @@ public class CurrencyFrameService {
 
     public Mono<Long> countLatestCurrencyFrames(Source source, Country country, CurrencyCode firstCurrency, CurrencyCode secondCurrency) {
         return currencyFrameRepository.countLastFrames(source, country, firstCurrency, secondCurrency);
+    }
+
+    public Flux<CurrencyFrame> findAll() {
+        return currencyFrameRepository.findAll();
     }
 }

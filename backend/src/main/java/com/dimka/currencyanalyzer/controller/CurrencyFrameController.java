@@ -6,10 +6,8 @@ import com.dimka.currencyanalyzer.model.CurrencyCode;
 import com.dimka.currencyanalyzer.model.Source;
 import com.dimka.currencyanalyzer.service.api.CurrencyFrameApiService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -31,5 +29,15 @@ public class CurrencyFrameController {
                                                          @RequestParam CurrencyCode firstCurrency,
                                                          @RequestParam CurrencyCode secondCurrency) {
         return currencyFrameApiService.getLatestCurrencies(source, country, firstCurrency, secondCurrency);
+    }
+
+    @GetMapping(value = "/currencies/history/zip", produces="application/zip")
+    public Mono<byte[]> downloadArticles() {
+        return currencyFrameApiService.getZipHistory();
+    }
+
+    @PostMapping("/currencies/history/zip")
+    public void applyHistory(MultipartFile file) {
+        currencyFrameApiService.applyHistory(file);
     }
 }

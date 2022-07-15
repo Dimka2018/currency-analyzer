@@ -3,10 +3,10 @@ spring:
     url: r2dbc:postgresql://localhost:5432/currencyanalyzer
     username: admin
     password: admin
-#  flyway:
-#    url: jdbc:postgresql://localhost:5432/currencyanalyzer
-#    user: admin
-#    password: admin
+  flyway:
+    url: jdbc:postgresql://localhost:5432/currencyanalyzer
+    user: admin
+    password: admin
 
 network:
   header:
@@ -46,6 +46,7 @@ client:
     base-url: https://www.raiffeisen.ru
   vtb:
     base-url: https://www.vtb.ru
+    enable: false
   swedbank-latvia:
     base-url: https://www.swedbank.lv
   citadele:

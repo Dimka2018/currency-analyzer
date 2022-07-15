@@ -24,7 +24,6 @@ public class SberCurrencyCollector extends CurrencyCollector {
         this.sberClient = sberClient;
     }
 
-
     @Override
     public List<CurrencyFrame> getCurrencies() {
         SberCurrencyResponse response = sberClient.getCurrencies();
