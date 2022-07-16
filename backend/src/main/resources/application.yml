@@ -40,13 +40,14 @@ client:
     base-url: https://api.tinkoff.ru
   sber:
     base-url: https://www.sberbank.ru
+    enable: false
   gazprom:
     base-url: https://www.gazprombank.ru
   raiffeizen:
     base-url: https://www.raiffeisen.ru
   vtb:
-    base-url: https://www.vtb.ru
-    enable: false
+    base-url: https://siteapi.vtb.ru
+    enable: true
   swedbank-latvia:
     base-url: https://www.swedbank.lv
   citadele:
