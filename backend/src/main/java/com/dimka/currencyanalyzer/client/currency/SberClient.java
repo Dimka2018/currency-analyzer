@@ -23,6 +23,7 @@ public class SberClient {
     public SberCurrencyResponse getCurrencies() {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/driver/chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
+        options.setHeadless(true);
         ChromeDriver driver = new ChromeDriver(options);
         String data;
         try {

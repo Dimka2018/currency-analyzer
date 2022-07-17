@@ -8,6 +8,7 @@ import com.dimka.currencyanalyzer.model.CurrencyFrame;
 import com.dimka.currencyanalyzer.model.Source;
 import com.dimka.currencyanalyzer.service.CurrencyFrameService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
@@ -18,6 +19,9 @@ import java.util.List;
 public class SberCurrencyCollector extends CurrencyCollector {
 
     private final SberClient sberClient;
+
+    @Value("${client.sber.enable:true}")
+    private boolean enable;
 
     public SberCurrencyCollector(CurrencyFrameService currencyFrameService, SberClient sberClient) {
         super(currencyFrameService);
@@ -49,5 +53,10 @@ public class SberCurrencyCollector extends CurrencyCollector {
                         .setBuyPrice(response.getEuro().getRateList().get(0).getRateBuy())
                         .setSellPrice(response.getEuro().getRateList().get(0).getRateSell())
         );
+    }
+
+    @Override
+    boolean isEnable() {
+        return this.enable;
     }
 }
