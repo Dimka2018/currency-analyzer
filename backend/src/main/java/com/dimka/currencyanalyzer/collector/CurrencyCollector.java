@@ -10,6 +10,7 @@ import reactor.core.publisher.Flux;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 public abstract class CurrencyCollector {
@@ -37,9 +38,9 @@ public abstract class CurrencyCollector {
 
     private CurrencyFrame fillMovingAverage(CurrencyFrame frame) {
         long count = currencyFrameService.countLatestCurrencyFrames(frame.getSource(),
-                frame.getCountry(),
-                frame.getFirstCurrency(),
-                frame.getSecondCurrency())
+                        frame.getCountry(),
+                        frame.getFirstCurrency(),
+                        frame.getSecondCurrency())
                 .blockOptional()
                 .orElseThrow() + 1;
         Flux<CurrencyFrame> frames = currencyFrameService.getLatestCurrencyFrames(frame.getSource(), frame.getCountry(), frame.getFirstCurrency(), frame.getSecondCurrency());
@@ -55,9 +56,11 @@ public abstract class CurrencyCollector {
     private boolean isNew(CurrencyFrame frame) {
         CurrencyFrame latestUsdCurrencyFrame = currencyFrameService.getLatestCurrencyFrame(frame.getSource(),
                 frame.getCountry(), frame.getFirstCurrency(), frame.getSecondCurrency()).block();
-        return latestUsdCurrencyFrame == null ||
+        Optional<CurrencyFrame> fxRate = currencyFrameService.getFxRate(frame.getSource(), frame.getCountry(), frame.getFirstCurrency(),
+                frame.getSecondCurrency(), frame.getDate()).block();
+        return fxRate.isEmpty() && (latestUsdCurrencyFrame == null ||
                 !latestUsdCurrencyFrame.getBuyPrice().equals(frame.getBuyPrice()) ||
-                !latestUsdCurrencyFrame.getSellPrice().equals(frame.getSellPrice());
+                !latestUsdCurrencyFrame.getSellPrice().equals(frame.getSellPrice()));
     }
 
 }

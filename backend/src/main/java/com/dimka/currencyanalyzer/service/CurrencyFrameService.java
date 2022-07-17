@@ -10,7 +10,8 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
+import java.time.Instant;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -36,6 +37,12 @@ public class CurrencyFrameService {
 
     public Mono<CurrencyFrame> getLatestCurrencyFrame(Source source, Country country, CurrencyCode firstCurrency, CurrencyCode secondCurrency) {
         return currencyFrameRepository.findLatestFrame(source, country, firstCurrency, secondCurrency);
+    }
+
+    public Mono<Optional<CurrencyFrame>> getFxRate(Source source, Country country,
+                                                   CurrencyCode firstCurrency, CurrencyCode secondCurrency,
+                                                   Instant date) {
+        return currencyFrameRepository.findFxRate(source, country, firstCurrency, secondCurrency, date);
     }
 
     public Mono<Long> countLatestCurrencyFrames(Source source, Country country, CurrencyCode firstCurrency, CurrencyCode secondCurrency) {

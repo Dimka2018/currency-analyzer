@@ -9,6 +9,9 @@ import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.Instant;
+import java.util.Optional;
+
 public interface CurrencyFrameRepository extends ReactiveCrudRepository<CurrencyFrame, Long> {
 
     @Query("""
@@ -50,5 +53,19 @@ public interface CurrencyFrameRepository extends ReactiveCrudRepository<Currency
                                Country country,
                                CurrencyCode firstCurrency,
                                CurrencyCode secondCurrency);
+
+    @Query("""
+            SELECT * FROM CURRENCY_FRAME WHERE
+            SOURCE = :source AND
+            COUNTRY = :contry AND
+            FIRST_CURRENCY = :firstCurrency AND
+            SECOND_CURRENCY = :secondCurrency AND
+            DATE = :date
+            """)
+    Mono<Optional<CurrencyFrame>> findFxRate(Source source,
+                                             Country country,
+                                             CurrencyCode firstCurrency,
+                                             CurrencyCode secondCurrency,
+                                             Instant date);
 
 }

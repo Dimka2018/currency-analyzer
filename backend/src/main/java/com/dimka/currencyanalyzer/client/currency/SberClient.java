@@ -19,9 +19,12 @@ public class SberClient {
     @Value("${client.sber.base-url}")
     private String url;
 
+    @Value("${selenium.driver-path}")
+    private String seleniumDriverPath;
+
     @SneakyThrows
     public SberCurrencyResponse getCurrencies() {
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/driver/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", seleniumDriverPath);
         ChromeOptions options = new ChromeOptions();
         options.setHeadless(true);
         ChromeDriver driver = new ChromeDriver(options);
