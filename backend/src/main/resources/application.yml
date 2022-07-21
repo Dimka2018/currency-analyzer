@@ -40,7 +40,7 @@ client:
     base-url: https://api.tinkoff.ru
   sber:
     base-url: https://www.sberbank.ru
-    enable: true
+    enable: false
   gazprom:
     base-url: https://www.gazprombank.ru
   raiffeizen:

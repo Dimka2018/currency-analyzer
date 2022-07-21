@@ -32,7 +32,7 @@ public class CurrencyFrameController {
     }
 
     @GetMapping(value = "/currencies/history/zip", produces="application/zip")
-    public Mono<byte[]> downloadArticles() {
+    public byte[] downloadArticles() {
         return currencyFrameApiService.getZipHistory();
     }
 

@@ -57,12 +57,12 @@ public interface CurrencyFrameRepository extends ReactiveCrudRepository<Currency
     @Query("""
             SELECT * FROM CURRENCY_FRAME WHERE
             SOURCE = :source AND
-            COUNTRY = :contry AND
+            COUNTRY = :country AND
             FIRST_CURRENCY = :firstCurrency AND
             SECOND_CURRENCY = :secondCurrency AND
             DATE = :date
             """)
-    Mono<Optional<CurrencyFrame>> findFxRate(Source source,
+    Flux<CurrencyFrame> findFxRate(Source source,
                                              Country country,
                                              CurrencyCode firstCurrency,
                                              CurrencyCode secondCurrency,

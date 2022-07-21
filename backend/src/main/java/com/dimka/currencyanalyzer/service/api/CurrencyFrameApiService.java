@@ -8,17 +8,16 @@ import com.dimka.currencyanalyzer.model.CurrencyFrame;
 import com.dimka.currencyanalyzer.model.Source;
 import com.dimka.currencyanalyzer.service.CurrencyFrameService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
-import reactor.core.scheduler.Schedulers;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -28,6 +27,7 @@ import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class CurrencyFrameApiService {
@@ -48,24 +48,15 @@ public class CurrencyFrameApiService {
     }
 
     @SneakyThrows
-    public Mono<byte[]> getZipHistory() {
+    public byte[] getZipHistory() {
         try (ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
             try (ZipOutputStream zipOutputStream = new ZipOutputStream(bos)) {
-                return currencyFrameService.findAll()
-                        .collect(Collectors.toList())
-                        .map(this::asBytes)
-                        .publishOn(Schedulers.boundedElastic())
-                        .map(bytes -> {
-                            try {
-                                zipOutputStream.putNextEntry(new ZipEntry("fxRates.json"));
-                                zipOutputStream.write(bytes);
-                                zipOutputStream.closeEntry();
-                            } catch (Exception e) {
-                                throw new RuntimeException("Can't parse history");
-                            }
-                            return bos.toByteArray();
-                        });
+                List<CurrencyFrame> fxRates = currencyFrameService.findAll().collectList().share().block();
+                zipOutputStream.putNextEntry(new ZipEntry("fxRates.json"));
+                zipOutputStream.write(asBytes(fxRates));
+                zipOutputStream.closeEntry();
             }
+            return bos.toByteArray();
         }
     }
 
@@ -89,12 +80,16 @@ public class CurrencyFrameApiService {
 
     @SneakyThrows
     private CurrencyFrame[] toFxRates(byte[] content) {
-        return new ObjectMapper().readValue(content, CurrencyFrame[].class);
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        return mapper.readValue(content, CurrencyFrame[].class);
     }
 
     @SneakyThrows
     private <T> byte[] asBytes(T t) {
-        return new ObjectMapper().writeValueAsBytes(t);
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        return mapper.writeValueAsBytes(t);
     }
 
 }

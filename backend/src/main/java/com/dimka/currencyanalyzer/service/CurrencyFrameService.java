@@ -39,7 +39,7 @@ public class CurrencyFrameService {
         return currencyFrameRepository.findLatestFrame(source, country, firstCurrency, secondCurrency);
     }
 
-    public Mono<Optional<CurrencyFrame>> getFxRate(Source source, Country country,
+    public Flux<CurrencyFrame> getFxRate(Source source, Country country,
                                                    CurrencyCode firstCurrency, CurrencyCode secondCurrency,
                                                    Instant date) {
         return currencyFrameRepository.findFxRate(source, country, firstCurrency, secondCurrency, date);

@@ -56,9 +56,9 @@ public abstract class CurrencyCollector {
     private boolean isNew(CurrencyFrame frame) {
         CurrencyFrame latestUsdCurrencyFrame = currencyFrameService.getLatestCurrencyFrame(frame.getSource(),
                 frame.getCountry(), frame.getFirstCurrency(), frame.getSecondCurrency()).block();
-        Optional<CurrencyFrame> fxRate = currencyFrameService.getFxRate(frame.getSource(), frame.getCountry(), frame.getFirstCurrency(),
-                frame.getSecondCurrency(), frame.getDate()).block();
-        return fxRate.isEmpty() && (latestUsdCurrencyFrame == null ||
+        CurrencyFrame fxRate = currencyFrameService.getFxRate(frame.getSource(), frame.getCountry(), frame.getFirstCurrency(),
+                frame.getSecondCurrency(), frame.getDate()).blockLast();
+        return fxRate != null && (latestUsdCurrencyFrame == null ||
                 !latestUsdCurrencyFrame.getBuyPrice().equals(frame.getBuyPrice()) ||
                 !latestUsdCurrencyFrame.getSellPrice().equals(frame.getSellPrice()));
     }
